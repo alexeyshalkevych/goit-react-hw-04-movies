@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import {
+  Route,
+  Switch,
+  useRouteMatch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import MovieDetails from '../components/MovieDetails/MovieDetails';
 import InfoList from '../components/InfoList/InfoList';
@@ -7,15 +13,15 @@ import { fetchMovieWithId } from '../services/movie-api';
 import getIdFromMatch from '../utils/getIdFromMatch';
 import routes from '../routes';
 
-// const AsyncCast = lazy(() =>
-//   import('../components/Cast/Cast' /* webpackChunkName: "cast-page" */),
-// );
+const AsyncCast = lazy(() =>
+  import('../components/Cast/Cast' /* webpackChunkName: "cast-page" */),
+);
 
-// const AsyncReviews = lazy(() =>
-//   import(
-//     '../components/Reviews/Reviews' /* webpackChunkName: "reviews-page" */
-//   ),
-// );
+const AsyncReviews = lazy(() =>
+  import(
+    '../components/Reviews/Reviews' /* webpackChunkName: "reviews-page" */
+  ),
+);
 
 const styles = { textAlign: 'center' };
 
@@ -48,14 +54,23 @@ const MovieDetailsPage = () => {
         <>
           <MovieDetails {...movie} onGoback={handleGoBack} />
           <InfoList />
-          <Loader
-            style={styles}
-            type="ThreeDots"
-            color="#F1005C"
-            height={100}
-            width={100}
-            timeout={3000}
-          />
+          <Suspense
+            fallback={
+              <Loader
+                style={styles}
+                type="ThreeDots"
+                color="#F1005C"
+                height={100}
+                width={100}
+                timeout={3000}
+              />
+            }
+          >
+            <Switch>
+              <Route path={`${match.path}/cast`} component={AsyncCast} />
+              <Route path={`${match.path}/reviews`} component={AsyncReviews} />
+            </Switch>
+          </Suspense>
         </>
       )}
     </div>
