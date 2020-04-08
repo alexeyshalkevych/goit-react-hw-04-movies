@@ -3,22 +3,25 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import routes from '../../routes';
 import Navigation from '../Navigation/Navigation';
+import AppContainer from './App.styled';
 
 const AsyncHomePage = lazy(() =>
-  import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
+  import('../../pages/HomePage/HomePage' /* webpackChunkName: "home-page" */),
 );
 const AsyncMoviesPage = lazy(() =>
-  import('../../pages/MoviePage' /* webpackChunkName: "movies-page" */),
+  import(
+    '../../pages/MoviePage/MoviePage' /* webpackChunkName: "movies-page" */
+  ),
 );
 const AsyncMoviesDetailsPage = lazy(() =>
   import(
-    '../../pages/MovieDetailsPage'
+    '../../pages/MovieDetailsPage/MovieDetailsPage'
     /* webpackChunkName: "movies-details-page" */
   ),
 );
 
 const App = () => (
-  <div>
+  <AppContainer>
     <Navigation />
     <Suspense
       fallback={
@@ -39,7 +42,7 @@ const App = () => (
         <Redirect to={routes.HOME} />
       </Switch>
     </Suspense>
-  </div>
+  </AppContainer>
 );
 
 export default App;

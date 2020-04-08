@@ -7,23 +7,25 @@ import {
   useLocation,
 } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-import MovieDetails from '../components/MovieDetails/MovieDetails';
-import InfoList from '../components/InfoList/InfoList';
-import { fetchMovieWithId } from '../services/movie-api';
-import getIdFromMatch from '../utils/getIdFromMatch';
-import routes from '../routes';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
+import InfoList from '../../components/InfoList/InfoList';
+import { fetchMovieWithId } from '../../services/movie-api';
+import getIdFromMatch from '../../utils/getIdFromMatch';
+import routes from '../../routes';
+import {
+  MovieDetailsContainer,
+  MovieDetailsTitle,
+} from './MovieDetailsPage.styled';
 
 const AsyncCast = lazy(() =>
-  import('../components/Cast/Cast' /* webpackChunkName: "cast-page" */),
+  import('../../components/Cast/Cast' /* webpackChunkName: "cast-page" */),
 );
 
 const AsyncReviews = lazy(() =>
   import(
-    '../components/Reviews/Reviews' /* webpackChunkName: "reviews-page" */
+    '../../components/Reviews/Reviews' /* webpackChunkName: "reviews-page" */
   ),
 );
-
-const styles = { textAlign: 'center' };
 
 const MovieDetailsPage = () => {
   const match = useRouteMatch();
@@ -48,8 +50,8 @@ const MovieDetailsPage = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center">Movie Details Page</h1>
+    <MovieDetailsContainer>
+      <MovieDetailsTitle>Movie Details Page</MovieDetailsTitle>
       {movie && (
         <>
           <MovieDetails {...movie} onGoback={handleGoBack} />
@@ -57,7 +59,7 @@ const MovieDetailsPage = () => {
           <Suspense
             fallback={
               <Loader
-                style={styles}
+                style={{ textAlign: 'center' }}
                 type="ThreeDots"
                 color="#F1005C"
                 height={100}
@@ -73,7 +75,7 @@ const MovieDetailsPage = () => {
           </Suspense>
         </>
       )}
-    </div>
+    </MovieDetailsContainer>
   );
 };
 

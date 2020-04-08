@@ -1,19 +1,18 @@
 import React from 'react';
-
-import { Link, useLocation, useRouteMatch } from 'react-router-dom';
-
-const infoItems = ['cast', 'reviews'];
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import infoItems from '../../utils/infoItems';
+import { InfoItems, InfoItem } from './InfoList.styled';
 
 const InfoList = () => {
   const location = useLocation();
   const match = useRouteMatch();
 
   return (
-    <ul>
+    <InfoItems>
       {infoItems.length > 0 &&
         infoItems.map(item => (
-          <li key={item}>
-            <Link
+          <InfoItem key={item}>
+            <NavLink
               to={{
                 pathname: `${match.url}/${item}`,
                 state: {
@@ -26,10 +25,10 @@ const InfoList = () => {
               }}
             >
               {item}
-            </Link>
-          </li>
+            </NavLink>
+          </InfoItem>
         ))}
-    </ul>
+    </InfoItems>
   );
 };
 

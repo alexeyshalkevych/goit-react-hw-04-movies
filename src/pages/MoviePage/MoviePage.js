@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { fetchMovieWithQuery } from '../services/movie-api';
-import SearchMoviesForm from '../components/SearchMoviesForm/SearchMoviesForm';
-import MoviesList from '../components/MoviesList/MoviesList';
-import getCategoryFromLocation from '../utils/getCategoryFromLocation';
+import { fetchMovieWithQuery } from '../../services/movie-api';
+import SearchMoviesForm from '../../components/SearchMoviesForm/SearchMoviesForm';
+import MoviesList from '../../components/MoviesList/MoviesList';
+import getCategoryFromLocation from '../../utils/getCategoryFromLocation';
+import { MovieContainer, MovieTitle } from './MoviePage.styled';
 
 const MoviesPage = () => {
   const history = useHistory();
@@ -44,11 +45,11 @@ const MoviesPage = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center">Movies Page</h1>
+    <MovieContainer>
+      <MovieTitle>Movies Page</MovieTitle>
       <SearchMoviesForm onSubmit={searchMovie} />
       <MoviesList films={movies} />
-    </div>
+    </MovieContainer>
   );
 };
 

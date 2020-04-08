@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
-// import { List, ListItem } from './MovieList.styled';
+import {
+  List,
+  ListItem,
+  ListItemImage,
+  ListItemTitle,
+} from './MoviesList.styled';
 
 const MoviesList = ({ films }) => {
   const location = useLocation();
 
   return (
-    <ul>
+    <List>
       {films.length > 0 &&
         films.map(({ id, title, poster_path: posterPath }) => (
-          <li key={id}>
+          <ListItem key={id}>
             <Link
               to={{
                 pathname: `/movies/${id}`,
@@ -19,17 +24,21 @@ const MoviesList = ({ films }) => {
                 },
               }}
             >
-              <img
-                src={`https://image.tmdb.org/t/p/original${posterPath}`}
-                alt={title}
-                width="484"
-                // height="550"
-              />
-              <h5>{title}</h5>
+              {posterPath ? (
+                <ListItemImage
+                  src={`https://image.tmdb.org/t/p/original${posterPath}`}
+                  alt={title}
+                  width="480"
+                />
+              ) : (
+                <ListItemImage src="http://placehold.it/480x620" alt={title} />
+              )}
+
+              <ListItemTitle>{title}</ListItemTitle>
             </Link>
-          </li>
+          </ListItem>
         ))}
-    </ul>
+    </List>
   );
 };
 

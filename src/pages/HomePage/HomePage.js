@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPopularTodayMovies } from '../services/movie-api';
-import MoviesList from '../components/MoviesList/MoviesList';
+import { fetchPopularTodayMovies } from '../../services/movie-api';
+import MoviesList from '../../components/MoviesList/MoviesList';
+import HomeTitle from './HomePage.styled';
 
 const HomePage = () => {
   const [films, setFilms] = useState([]);
@@ -11,7 +12,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1 className="text-center">Home Page</h1>
+      <HomeTitle>Trending today</HomeTitle>
       {films.length > 0 && <MoviesList films={films} />}
     </div>
   );
