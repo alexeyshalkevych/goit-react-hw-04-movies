@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { fetchMovieWithCast } from '../../services/movie-api';
 import getIdFromMatch from '../../utils/getIdFromMatch';
+import api from '../../utils/api';
 import {
   CastCharacterName,
   CastList,
@@ -28,14 +29,14 @@ const Cast = () => {
             <CastItem key={id}>
               {profilePath ? (
                 <CastImage
-                  src={`https://image.tmdb.org/t/p/original${profilePath}`}
+                  src={api.IMAGE_URL + profilePath}
                   alt={name}
                   width="100"
                   height="150"
                 />
               ) : (
                 <CastImage
-                  src="http://placehold.it/100x150"
+                  src={api.CAST_IMAGE_URL_DEFAULT}
                   alt={name}
                   width="100"
                   height="150"

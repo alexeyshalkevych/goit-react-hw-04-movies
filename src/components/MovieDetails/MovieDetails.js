@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getDate from '../../utils/getDates';
+import api from '../../utils/api';
 import {
   DetailsContainer,
   DetailsGenresList,
@@ -33,14 +34,14 @@ const MovieDetails = ({
       <DetailsContainer>
         {posterPath ? (
           <DetailsImage
-            src={`https://image.tmdb.org/t/p/original${posterPath}`}
+            src={api.IMAGE_URL + posterPath}
             alt={originalTilte}
             width="250"
             height="350"
           />
         ) : (
           <DetailsImage
-            src="http://placehold.it/250x350"
+            src={api.DETAILS_IMAGE_URL_DEFAULT}
             alt={originalTilte}
             width="250"
             height="350"
@@ -81,7 +82,7 @@ MovieDetails.propTypes = {
 };
 
 MovieDetails.defaultProps = {
-  poster_path: 'http://placehold.it/250x350',
+  poster_path: api.DETAILS_IMAGE_URL_DEFAULT,
 };
 
 export default MovieDetails;

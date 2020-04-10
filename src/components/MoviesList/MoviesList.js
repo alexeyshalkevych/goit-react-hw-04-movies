@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import api from '../../utils/api';
 import {
   List,
   ListItem,
@@ -26,12 +27,15 @@ const MoviesList = ({ films }) => {
             >
               {posterPath ? (
                 <ListItemImage
-                  src={`https://image.tmdb.org/t/p/original${posterPath}`}
+                  src={api.IMAGE_URL + posterPath}
                   alt={title}
                   width="480"
                 />
               ) : (
-                <ListItemImage src="http://placehold.it/480x620" alt={title} />
+                <ListItemImage
+                  src={api.LIST_ITEM_IMAGE_URL_DEFAULT}
+                  alt={title}
+                />
               )}
 
               <ListItemTitle>{title}</ListItemTitle>
